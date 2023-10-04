@@ -16,7 +16,7 @@ jobs:
         
       - name: Get details
         run: |
-          git fetch
+          git fetch --all
           echo "Author: ${{ github.actor }}"
           echo "Last Commit: ${{ github.event.pull_request.head.sha }}"
           echo "Changes between the last commit and the default branch:"
