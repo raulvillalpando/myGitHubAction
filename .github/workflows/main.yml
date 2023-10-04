@@ -1,0 +1,23 @@
+name: MyAction Get Details
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Print Hello world
+        run: echo Hello, world!
+        
+      - name: Run a multi-line script
+        run: |
+          echo "Author: ${{ github.actor }}"
+          echo "Last Commit: $(git log -1 --pretty=format:'%h - %an, %ar: %s')"
+          echo "Changes between the last commit and the default branch:"
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          git diff --name-status ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}             
