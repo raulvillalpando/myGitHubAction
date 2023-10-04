@@ -14,8 +14,9 @@ jobs:
       - name: Print Hello world
         run: echo Hello, world!
         
-      - name: Run a multi-line script
+      - name: Get details
         run: |
+          git fetch
           echo "Author: ${{ github.actor }}"
           echo "Last Commit: ${{ github.event.pull_request.head.sha }}"
           echo "Changes between the last commit and the default branch:"
