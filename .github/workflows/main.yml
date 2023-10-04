@@ -17,7 +17,9 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo "Author: ${{ github.actor }}"
-          echo "Last Commit: $(git log -1 --pretty=format:'%h - %an, %ar: %s')"
+          echo "Last Commit:"
+          git log -1 --oneline
           echo "Changes between the last commit and the default branch:"
-          git fetch origin ${{ github.event.pull_request.base.ref }}
-          git diff --name-status ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}             
+          branch_name="${{ github.event.pull_request.head.ref }}"
+          git checkout origin/"${branch_name}"
+          git diff origin/main     
